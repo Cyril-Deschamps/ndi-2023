@@ -8,7 +8,6 @@ import Link from "next/link";
 import { format } from "date-fns";
 import BlankImage from "../../../assets/img/blank.svg";
 import BookingLogo from "../../../assets/img/logo-booking-affiliate.svg";
-import { event } from "nextjs-google-analytics";
 import { TFuncKey } from "react-i18next";
 import coffeeIcon from "../../../assets/img/icons/icon-coffee.svg";
 import hotelIcon from "../../../assets/img/icons/icon-hotel.svg";
@@ -110,16 +109,6 @@ const TripListItem = ({ trip }: { trip: Trip }): JSX.Element => {
                 "p-2 px-3 mt-2 bg-green rounded-xl text-white uppercase text-xs font-medium w-full text-center"
               }
               href={`https://www.kiwi.com/deep?affilid=cyrildeschampsorgatripsorgatrips&booking_token=${trip.Transportation.bookingToken}`}
-              onClick={() => {
-                event("Redirect to Kiwi", {
-                  category: "Trip Result",
-                  label: "Button",
-                });
-                event("Redirect to affiliation", {
-                  category: "Trip Result",
-                  label: "Button",
-                });
-              }}
               rel={"noopener noreferrer"}
               target={"_blank"}
             >
@@ -141,16 +130,6 @@ const TripListItem = ({ trip }: { trip: Trip }): JSX.Element => {
             )}&group_adults=${trip.travelersNumber}&nflt=price%3DUSD-min-${
               trip.Accomodation.averagePricePerNight
             }-1`}
-            onClick={() => {
-              event("Redirect to Booking", {
-                category: "Trip Result",
-                label: "Button",
-              });
-              event("Redirect to affiliation", {
-                category: "Trip Result",
-                label: "Button",
-              });
-            }}
             rel={"noopener noreferrer"}
             target={"_blank"}
           >

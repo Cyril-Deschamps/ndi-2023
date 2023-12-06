@@ -7,10 +7,10 @@ on:
       - production
 
 env:
-  DOCKER_PROJECT_NAME_DEV: dev-orgatrips-front
-  PROJECT_PATH_DEV: ${{ secrets.DEVELOPMENT_DOCKER_IMAGES_PATH }}/dev-orgatrips-front
-  DOCKER_PROJECT_NAME_PROD: orgatrips-front
-  PROJECT_PATH_PROD: ${{ secrets.PRODUCTION_DOCKER_IMAGES_PATH }}/orgatrips-front
+  DOCKER_PROJECT_NAME_DEV: dev-ndl2023-front
+  PROJECT_PATH_DEV: ${{ secrets.DEVELOPMENT_DOCKER_IMAGES_PATH }}/dev-ndl2023-front
+  DOCKER_PROJECT_NAME_PROD: ndl2023-front
+  PROJECT_PATH_PROD: ${{ secrets.PRODUCTION_DOCKER_IMAGES_PATH }}/ndl2023-front
 
 jobs:
   build:
@@ -24,17 +24,12 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | tr a-z A-Z)"
         id: extract_branch
 
-      - name: Add .env variable
-        run: |
-          echo "REACT_APP_BOOKING_AFFILIATE_ID=${{ secrets.REACT_APP_BOOKING_AFFILIATE_ID }}" >> .env
-
       # DEVELOPMENT
       - name: Add .env variable based on branch development
         if: ${{ steps.extract_branch.outputs.branch == 'DEVELOPMENT' }}
         run: |
           echo "REACT_APP_API_HOST=${{ secrets.DEVELOPMENT_REACT_APP_API_HOST }}" >> .env
           echo "REACT_APP_HOST=${{ secrets.DEVELOPMENT_REACT_APP_HOST }}" >> .env
-          echo "REACT_APP_GA_MEASUREMENT_ID=${{ secrets.DEVELOPMENT_REACT_APP_GA_MEASUREMENT_ID }}" >> .env
 
       # PRODUCTION
       - name: Add .env variable based on branch production
@@ -42,7 +37,6 @@ jobs:
         run: |
           echo "REACT_APP_API_HOST=${{ secrets.PRODUCTION_REACT_APP_API_HOST }}" >> .env
           echo "REACT_APP_HOST=${{ secrets.PRODUCTION_REACT_APP_HOST }}" >> .env
-          echo "REACT_APP_GA_MEASUREMENT_ID=${{ secrets.PRODUCTION_REACT_APP_GA_MEASUREMENT_ID }}" >> .env
 
       # DEVELOPMENT
       - name: Copy repository contents via scp DEVELOPMENT

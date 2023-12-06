@@ -17,7 +17,6 @@ import { useTransition } from "../../transition/TransitionContext";
 import { TRIP_LINK } from "../../../routes";
 import { useRouter } from "next-translate-routes";
 import { AxiosError } from "axios";
-import { event } from "nextjs-google-analytics";
 import ValueObserver from "../../forms/ValueObserver";
 import Image from "next/image";
 import InfoIcon from "../../../assets/img/icons/icon-info.svg";
@@ -114,10 +113,6 @@ const TripSearchForm = ({ className }: { className?: string }): JSX.Element => {
           locale: i18n.language,
         }}
         onSubmit={(values: SearchTripsForm, { setSubmitting }) => {
-          event("Trip Search Submit", {
-            category: "Trip Search",
-            label: "Button",
-          });
           triggerTransition(t("search_trips_loading"));
           return searchTrips(values).then(
             () => {
