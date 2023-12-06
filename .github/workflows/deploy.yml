@@ -7,10 +7,10 @@ on:
       - production
 
 env:
-  DOCKER_PROJECT_NAME_DEV: dev-ndl2023-front
-  PROJECT_PATH_DEV: ${{ secrets.DEVELOPMENT_DOCKER_IMAGES_PATH }}/dev-ndl2023-front
-  DOCKER_PROJECT_NAME_PROD: ndl2023-front
-  PROJECT_PATH_PROD: ${{ secrets.PRODUCTION_DOCKER_IMAGES_PATH }}/ndl2023-front
+  DOCKER_PROJECT_NAME_DEV: dev-ndi2023-front
+  PROJECT_PATH_DEV: ${{ secrets.DEVELOPMENT_DOCKER_IMAGES_PATH }}/dev-ndi2023-front
+  DOCKER_PROJECT_NAME_PROD: ndi2023-front
+  PROJECT_PATH_PROD: ${{ secrets.PRODUCTION_DOCKER_IMAGES_PATH }}/ndi2023-front
 
 jobs:
   build:

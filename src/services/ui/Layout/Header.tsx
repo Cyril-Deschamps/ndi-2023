@@ -1,10 +1,5 @@
-import Image from "next/image";
-import Link from "next-translate-routes/link";
+import Link from "next/link";
 import { BASE_LINK } from "src/routes";
-
-import logo from "../../../assets/img/logo.png";
-import logoKiwiAffiliate from "../../../assets/img/logo-kiwi-affiliate.png";
-import logoBookingAffiliate from "../../../assets/img/logo-booking-affiliate.svg";
 
 const Header = (): JSX.Element => {
   return (
@@ -15,7 +10,7 @@ const Header = (): JSX.Element => {
     >
       <Link href={BASE_LINK}>
         <div className={"w-52 sm:w-80 ml-[-10px] mr-5 shrink-0"}>
-          <Image alt={"logo"} src={logo} />
+          <p>LOGO</p>
         </div>
       </Link>
       <nav
@@ -24,10 +19,7 @@ const Header = (): JSX.Element => {
         }
       >
         <div className={"w-14 sm:w-24"}>
-          <Image alt={"logo-booking-affiliate"} src={logoBookingAffiliate} />
-        </div>
-        <div className={"w-14 sm:w-24"}>
-          <Image alt={"logo-kiwi-affiliate"} src={logoKiwiAffiliate} />
+          <p>Header</p>
         </div>
       </nav>
     </header>

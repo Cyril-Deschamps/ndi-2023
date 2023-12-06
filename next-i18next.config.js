@@ -1,10 +1,10 @@
 module.exports = {
   i18n: {
-    defaultLocale: "en",
-    locales: ["fr", "en"],
+    defaultLocale: "fr",
+    locales: ["fr"],
   },
   fallbackLng: {
-    default: ["en"],
+    default: ["fr"],
   },
   interpolation: {
     escapeValue: false,
@@ -14,13 +14,10 @@ module.exports = {
     switch (namespace) {
       case "validations":
         return `./src/services/validations/i18n/${locale}.json`;
-      case "trip":
-        return `./src/services/trip/i18n/${locale}.json`;
       default:
-        return namespace !== "common" ?
-          `./src/services/i18n/pages/${namespace}/${locale}.json` : `./src/services/i18n/pages/website/${locale}.json`;
+        return `./src/services/validations/i18n/${locale}.json`;
     }
   },
   reloadOnPrerender: process.env.NODE_ENV === "development",
-  ns: ["validations", "trip", "home", "website", "legal_notice", "privacy_policy", "trips_results"],
+  ns: ["validations"],
 };

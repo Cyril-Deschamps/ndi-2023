@@ -7,12 +7,9 @@ import Head from "next/head";
 import "../assets/styles/global.css";
 import { Roboto } from "next/font/google";
 import nextI18NextConfig from "../../next-i18next.config";
-import { withTranslateRoutes } from "next-translate-routes";
 import "../services/validations/yup-init";
 import "../services/i18n";
 import { ProvideToast } from "../services/toast-notifications";
-import { ProvideTrip } from "../services/trip/tripProvider";
-import { ProvideTransition } from "../services/transition/TransitionContext";
 
 const varsityTeamFont = localFont({
   src: "../assets/fonts/VarsityTeam.otf",
@@ -41,15 +38,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         )}
       >
         <ProvideToast>
-          <ProvideTrip>
-            <ProvideTransition>
-              <Component {...pageProps} />
-            </ProvideTransition>
-          </ProvideTrip>
+          <Component {...pageProps} />
         </ProvideToast>
       </div>
     </React.StrictMode>
   );
 };
 
-export default appWithTranslation(withTranslateRoutes(App), nextI18NextConfig);
+export default appWithTranslation(App, nextI18NextConfig);

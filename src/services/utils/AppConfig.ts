@@ -1,4 +1,4 @@
 export const AppConfig = {
-  siteName: "OrgaTrips",
-  author: "Cyril Deschamps",
+  siteName: "NDI 2023",
+  author: "La 7ème compagnie",
 };

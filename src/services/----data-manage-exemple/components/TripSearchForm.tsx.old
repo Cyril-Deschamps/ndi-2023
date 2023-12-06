@@ -1,6 +1,6 @@
+/*
 import classNames from "classnames";
 import { addYears } from "date-fns";
-import { useTranslation } from "next-i18next";
 import React, { useCallback, useMemo, useState } from "react";
 import { object, number, string, date } from "yup";
 import { useCountry } from "../../countries/CountryContext";
@@ -8,26 +8,21 @@ import AutoField from "../../forms/AutoField";
 import Form from "../../forms/Form";
 import SubmitButton from "../../forms/SubmitButton";
 import ValidationsErrors from "../../forms/ValidationsErrors";
-import { useToastsWithIntl } from "../../toast-notifications";
 import { AirportType, budgetMax, SearchTripsForm } from "../trip";
 import { useTrip } from "../tripProvider";
 import iconPlane from "../../../assets/img/icons/icon-plane.svg";
 import { TFuncKey } from "react-i18next";
 import { useTransition } from "../../transition/TransitionContext";
-import { TRIP_LINK } from "../../../routes";
-import { useRouter } from "next-translate-routes";
 import { AxiosError } from "axios";
 import ValueObserver from "../../forms/ValueObserver";
 import Image from "next/image";
 import InfoIcon from "../../../assets/img/icons/icon-info.svg";
+import { t } from "i18next";
 
 const TripSearchForm = ({ className }: { className?: string }): JSX.Element => {
-  const { t, i18n } = useTranslation("trip");
-  const { toastError } = useToastsWithIntl("trip");
   const { searchTrips, findAirports } = useTrip();
   const { countriesList } = useCountry();
   const { triggerTransition, stopTransition } = useTransition();
-  const router = useRouter();
   const [adultsNumber, setAdultsNumber] = useState(1);
 
   const findAirportsAutoComplete = useCallback(
@@ -41,7 +36,7 @@ const TripSearchForm = ({ className }: { className?: string }): JSX.Element => {
           } - ${t(`AIRPORT_TYPES.${AirportType[airport.type]}` as TFuncKey)}`,
         })),
       ),
-    [countriesList, findAirports, t],
+    [countriesList, findAirports],
   );
 
   const adultsNumberEnum = useMemo(() => [...Array(10).keys()].slice(1), []);
@@ -94,7 +89,6 @@ const TripSearchForm = ({ className }: { className?: string }): JSX.Element => {
       adultsNumberEnum,
       childrenNumberEnum,
       findAirportsAutoComplete,
-      t,
     ],
   );
 
@@ -184,3 +178,4 @@ const TripSearchForm = ({ className }: { className?: string }): JSX.Element => {
 };
 
 export default TripSearchForm;
+*/

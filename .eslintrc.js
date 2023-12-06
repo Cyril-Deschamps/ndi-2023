@@ -64,26 +64,6 @@ module.exports = {
         html: true,
       },
     ],
-
-    // i18n
-    /*"i18next/no-literal-string": [
-      "warn",
-      {
-        ignoreCallee: [
-          "get",
-          "post",
-          "put",
-          "delete",
-          "logger",
-          "useTranslation",
-          "test",
-        ],
-        ignore: ["active"],
-        ignoreProperty: ["appearance"],
-        ignoreAttribute: ["placement"],
-      },
-    ],*/
-
     // Disable specific imports
     "no-restricted-imports": [
       process.env.NODE_ENV === "production" ? "error" : "warn",
