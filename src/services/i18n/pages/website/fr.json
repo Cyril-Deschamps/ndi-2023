@@ -1,0 +1,14 @@
+{
+  "pages": {
+    "home": "Trouvez une destination",
+    "trips_results": "Résultats voyages",
+    "blog": "Blog",
+    "contact": "Nous contacter",
+    "legal_notice": "Mentions légales",
+    "privacy_policy": "Politique de confidentialité"
+  },
+  "footer": {
+    "all_rights_reserved": "Tous droits réservés"
+  },
+  "no_result": "Aucun résultat"
+}
