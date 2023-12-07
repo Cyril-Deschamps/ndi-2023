@@ -19,7 +19,7 @@ const Menu = (): JSX.Element => {
   };
 
   return (
-    <div className={"flex flex-1 justify-center items-center bg-black"}>
+    <div className={"flex flex-1 justify-center items-center bg-green"}>
       {time < 3 ? <FirstView /> : <SecondView />}
     </div>
   );
@@ -39,24 +39,30 @@ export default Menu;
 
 const Forest = (): JSX.Element => {
   return (
-    <div className={"absolute bg-black w-screen h-screen p-4xl"}>
-      <div className={"text-white text-5xl"}>Forest</div>
+    <div className={"absolute bg-green w-screen h-screen p-4xl"}>
+      <div className={"text-white text-5xl"}>
+        <img src={""} />
+      </div>
     </div>
   );
 };
 
 const Ocean = (): JSX.Element => {
   return (
-    <div className={"absolute bg-black w-screen h-screen p-4xl"}>
-      <div className={"text-white text-5xl"}>Ocean</div>
+    <div className={"absolute bg-green w-screen h-screen p-4xl"}>
+      <div className={"text-white text-5xl"}>
+        <img src={""} />
+      </div>
     </div>
   );
 };
 
 const City = (): JSX.Element => {
   return (
-    <div className={"absolute bg-black w-screen h-screen p-4xl"}>
-      <div className={"text-white text-5xl"}>City</div>
+    <div className={"absolute bg-green w-screen h-screen p-4xl"}>
+      <div className={"text-white text-5xl"}>
+        <img src={""} />
+      </div>
     </div>
   );
 };
