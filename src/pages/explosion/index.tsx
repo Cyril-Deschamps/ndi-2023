@@ -1,28 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import arbre from "../../assets/img/arbre.png";
 
-const Home: React.FC = () => {
-  function MyButton() {
-    return <button>I'm a button</button>;
-  }
+function Arbre() {
+  const [maxWidth, setMaxWidht] = useState(1000);
+  const [maxHeight, setMaxHeight] = useState(600);
+  const min = 75;
 
-  function Arbre() {
-    return (
-      <Image
-        alt={"Arbre"}
-        className={"absolute top-0 left-0 object-fill w-20 h-20"}
-        src={arbre}
-      />
-    );
-  }
-
-  const item = "Bonjour les homosapiens";
+  useEffect(() => {
+    if (window !== undefined) {
+      setMaxWidht(window.innerWidth - min);
+      setMaxHeight(window.innerHeight * 0.6);
+    }
+  }, []);
 
   return (
-    <div>
-      <h1>{item}</h1>
-      <MyButton />
+    <Image
+      alt={"Arbre"}
+      className={`absolute object-fill w-20 h-20`}
+      src={arbre}
+      style={{
+        top: Math.round(min + Math.random() * (maxHeight - min)),
+        left: Math.round(min + Math.random() * (maxWidth - min)),
+      }}
+    />
+  );
+}
+
+const Home: React.FC = () => {
+  const item = document.getElementsByClassName("items");
+
+  return (
+    <div className={"items"}>
       <Arbre />
     </div>
   );
