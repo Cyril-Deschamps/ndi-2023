@@ -1,55 +1,37 @@
-import React from "react";
-import SizedSection from "../services/ui/SizedSection";
+import React, { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps } from "next";
 import nextI18NextConfig from "../../next-i18next.config";
-import AppLayout from "../services/ui/Layout/AppLayout";
-import BaseSeo from "../services/seo/BaseSeo";
 
 const Home = (): JSX.Element => {
+  const [time, setTime] = useState(0);
+
+  // React timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime((time) => time + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const FirstView = (): JSX.Element => {
+    return (
+      <p className={"text-white text-5xl fadeOut 5s ease-in-out"}>
+        Nous voici en 2021...
+      </p>
+    );
+  };
+
+  const SecondView = (): JSX.Element => {
+    return (
+      <p className={"text-white text-5xl fadeOut 5s ease-in-out"}>Chibre</p>
+    );
+  };
+
   return (
-    <AppLayout>
-      <BaseSeo description={"Coucou"} title={"LA NDI MDL"} />
-      <main className={"flex flex-col items-center"}>
-        <SizedSection
-          className={
-            "flex flex-row z-10 min-h-[28rem] items-start sm:min-h-[26rem] justify-center lg:justify-between"
-          }
-        >
-          <div
-            className={
-              "ml-xs sm:ml-xl md:ml-0 lg:ml-2xl relative flex flex-col items-center gap-s"
-            }
-          >
-            <h1
-              className={
-                "font-VarsityTeam md:w-full text-4xl md:text-5xl leading-8 md:leading-10 sm:tracking-wide text-center lg:text-start"
-              }
-            >
-              Home
-            </h1>
-          </div>
-        </SizedSection>
-        <div
-          className={
-            "bg-white w-full mt-[-54px] flex flex-col items-center pb-6 md:pb-12"
-          }
-        >
-          <SizedSection
-            className={"flex flex-col justify-between lg:flex-row items-center"}
-          >
-            <p
-              className={
-                "w-full xl:w-[34rem] text-center font-regular text-s leading-5 lg:pt-0 xl:pt-10  max-w-xl"
-              }
-            >
-              {" "}
-              Chibron
-            </p>
-          </SizedSection>
-        </div>
-      </main>
-    </AppLayout>
+    <div className={"flex flex-1 justify-center items-center"}>
+      {time < 10 ? <FirstView /> : <SecondView />}
+    </div>
   );
 };
 
