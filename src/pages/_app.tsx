@@ -34,7 +34,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         className={classNames(
           varsityTeamFont.variable,
           robotoFont.className,
-          "flex flex-col w-full min-h-screen p-0 m-0 bg-appBgColor font-Roboto",
+          "flex flex-col w-full min-h-screen p-0 m-0 bg-black font-Roboto",
         )}
       >
         <ProvideToast>
