@@ -1,10 +1,10 @@
 import React from "react";
-import SizedSection from "../services/ui/SizedSection";
+import SizedSection from "../../services/ui/SizedSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps } from "next";
-import nextI18NextConfig from "../../next-i18next.config";
-import AppLayout from "../services/ui/Layout/AppLayout";
-import BaseSeo from "../services/seo/BaseSeo";
+import nextI18NextConfig from "../../../next-i18next.config";
+import AppLayout from "../../services/ui/Layout/AppLayout";
+import BaseSeo from "../../services/seo/BaseSeo";
 
 const Home = (): JSX.Element => {
   return (
@@ -26,7 +26,7 @@ const Home = (): JSX.Element => {
                 "font-VarsityTeam md:w-full text-4xl md:text-5xl leading-8 md:leading-10 sm:tracking-wide text-center lg:text-start"
               }
             >
-              LIONEL TORRES FDP
+              gros fdp
             </h1>
           </div>
         </SizedSection>
