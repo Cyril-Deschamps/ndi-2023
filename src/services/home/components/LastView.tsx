@@ -123,9 +123,7 @@ const LastView = (): JSX.Element => {
       <Marker
         eventHandlers={{
           click: () => {
-            localStorage.setItem("step", "2");
-            setStep(2);
-            /* router.push("/snake") */
+            router.push("/snake");
           },
         }}
         icon={whereIsCharlieIcon}
@@ -144,9 +142,7 @@ const LastView = (): JSX.Element => {
       <Marker
         eventHandlers={{
           click: () => {
-            localStorage.setItem("step", "3");
-            setStep(3);
-            /*  router.push("/explosion") */
+            router.push("/explosion");
           },
         }}
         icon={arabIcon}
@@ -160,7 +156,7 @@ const LastView = (): JSX.Element => {
         >
           <p className={"text-center"}>Cliquer ici pour jouez à</p>
           <p className={"text-center font-bold"}>
-            Exploser des arbres au Moyen-Orient
+            Exploser les déchets du Moyen-Orient
           </p>
         </Tooltip>
       </Marker>

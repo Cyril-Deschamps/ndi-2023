@@ -43,7 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Component className={"z-10"} {...pageProps} />
           <button
             className={
-              "z-[100000] text-xs absolute bottom-3 right-3 bg-red-900 border hover:bg-blue-700 text-green-700 font-bold py-1 px-2 rounded"
+              "z-[100000] text-xs absolute bottom-3 right-3 bg-red-900 text-green-700 font-bold py-1 px-2 rounded"
             }
             onClick={() => {
               localStorage.clear();
@@ -54,7 +54,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               }
             }}
           >
-            <p>Reset game</p>
+            <p>Redémarrer le jeu</p>
           </button>
         </ProvideToast>
       </div>

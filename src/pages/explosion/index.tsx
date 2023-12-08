@@ -12,6 +12,7 @@ import petrole from "../../assets/img/pet_5.png";
 import toxique from "../../assets/img/tox_4.png";
 import whale from "../../assets/img/wha_8.png";
 import useSound from "use-sound";
+import { useRouter } from "next/router";
 
 const Ennemie: StaticImageData[] = [
   cigarette,
@@ -79,6 +80,7 @@ const Home: React.FC = () => {
   const [items, setItems] = useState<GeneratedItem[]>([]);
   const [score, setScore] = useState<number>(0);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const generatedItems = Array.from({ length: 10 }, () =>
@@ -158,7 +160,14 @@ const Home: React.FC = () => {
               "bg-blue-500 hover:bg-red-400-700 text-white font-bold py-2 px-4 rounded-full"
             }
           >
-            <a href={""}>PROCHAINE DESTINATION</a>
+            <button
+              onClick={() => {
+                localStorage.setItem("step", "3");
+                router.push("/");
+              }}
+            >
+              PROCHAINE DESTINATION
+            </button>
           </button>
         </div>
       ) : (

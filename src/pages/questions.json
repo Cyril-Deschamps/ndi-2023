@@ -13,20 +13,5 @@
     "id": 3,
     "text": "L'énergie nucléaire est la seule solution viable pour réduire les émissions de carbone.",
     "isCorrect": false
-  },
-  {
-    "id" : 4,
-    "text":"La voiture électrique va sauver la planète.",
-    "isCorrect" : false
-  },
-  {
-    "id" : 5,
-    "text":"Les énergies renouvelables (ENR) sont plus chères à produire.",
-    "isCorrect" : false
-  },
-  {
-    "id" : 6,
-    "text":"On peut agir à notre échelle, par exemple prendre une douche plutôt qu'un bain",
-    "isCorrect" : true
   }
 ]

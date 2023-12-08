@@ -5,6 +5,7 @@ import AppleLogo from "../assets/img/icons/applePixels.png";
 import useInterval from "../services/snake/useInterval";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const canvasX = 700;
 const canvasY = 700;
@@ -17,6 +18,7 @@ const scale = 50;
 const timeDelay = 150;
 
 function Snake() {
+  const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [snake, setSnake] = useState(initialSnake);
   const [apple, setApple] = useState(initialApple);
@@ -25,7 +27,9 @@ function Snake() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [isFruitLoaded, setIsFruitLoaded] = useState(false);
-  const [extraSquares, setExtraSquares] = useState< { id: number; text: string; isCorrect: boolean }[]>([]);
+  const [extraSquares, setExtraSquares] = useState<
+    { id: number; text: string; isCorrect: boolean }[]
+  >([]);
   const [isAlreadySquare, setIsAlreadySquare] = useState<boolean>(false);
   const [squareNumber, setSquareNumber] = useState<number>(0);
   const [questionText, setQuestionText] = useState<string | null>(null);
@@ -171,11 +175,16 @@ function Snake() {
         title: popupData.title,
         message: popupData.message,
         isCorrect,
-      })
+      });
     }
   };
 
   const handlePopupClose = (): void => {
+    if (popupContent?.isCorrect) {
+      localStorage.setItem("step", "2");
+    }
+    router.push("/");
+
     // Fermer la pop-up
     setShowPopup(false);
     // Effacer le contenu de la pop-up
@@ -192,23 +201,23 @@ function Snake() {
     }
   }, [squareNumber]);
 
-  useEffect(() => { 
+  useEffect(() => {
     const count = score % 3;
-    if (score != 0){
+    if (score != 0) {
       popCarre();
       if (count === 0 && score != 0) {
         setPause(true);
       }
-
     }
   }, [score]);
 
-  const popCarre = () => { //Fait apparaitre un carré de question
+  const popCarre = () => {
+    //Fait apparaitre un carré de question
     if (!isAlreadySquare) {
       setIsAlreadySquare(true);
     }
 
-    if (squareNumber < 3) { 
+    if (squareNumber < 3) {
       setSquareNumber(squareNumber + 1);
       const lastSquare = extraSquares[extraSquares.length - 1]?.id || 0;
       setExtraSquares([
@@ -225,7 +234,7 @@ function Snake() {
       <div>
         <Image
           alt={"fruit"}
-          className={"hidden"}
+          className={"invisible"}
           id={"fruit"}
           onLoad={() => setIsFruitLoaded(true)}
           src={AppleLogo}
@@ -242,7 +251,9 @@ function Snake() {
         {gameOver && (
           <div
             className={
-              "fixed top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl"}>
+              "fixed top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl"
+            }
+          >
             Game Over
           </div>
         )}
@@ -281,7 +292,9 @@ function Snake() {
             <div className={"popup"}>
               <h2>{popupContent.title}</h2>
               <p>{popupContent.message}</p>
-              <button onClick={handlePopupClose}>Retour au menu principal</button>
+              <button onClick={handlePopupClose}>
+                Retour au menu principal
+              </button>
             </div>
           </div>
         )}
