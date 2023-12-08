@@ -116,7 +116,7 @@ const LastView = (): JSX.Element => {
           interactive
           permanent
         >
-          <p className={"text-center"}>Cliquer ici pour jouez à</p>
+          <p className={"text-center"}>Cliquer ici pour jouer à</p>
           <p className={"text-center font-bold"}>Où est Charlie en Amazonie</p>
         </Tooltip>
       </Marker>
@@ -135,7 +135,7 @@ const LastView = (): JSX.Element => {
           interactive
           permanent
         >
-          <p className={"text-center"}>Cliquer ici pour jouez à</p>
+          <p className={"text-center"}>Cliquer ici pour jouer à</p>
           <p className={"text-center font-bold"}>Snake en Chine</p>
         </Tooltip>
       </Marker>
@@ -154,7 +154,7 @@ const LastView = (): JSX.Element => {
           interactive
           permanent
         >
-          <p className={"text-center"}>Cliquer ici pour jouez à</p>
+          <p className={"text-center"}>Cliquer ici pour jouer à</p>
           <p className={"text-center font-bold"}>
             Exploser les déchets du Moyen-Orient
           </p>

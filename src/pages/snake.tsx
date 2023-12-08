@@ -54,7 +54,7 @@ function Snake() {
       if (ctx) {
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        ctx.fillStyle = "#a3d001";
+        ctx.fillStyle = "#FFD700";
         snake.forEach(([x, y]) => ctx.fillRect(x, y, 1, 1));
         ctx.drawImage(fruit, apple[0], apple[1], 1, 1);
       }
@@ -242,7 +242,7 @@ function Snake() {
         />
         <canvas
           ref={canvasRef}
-          className={"mt-20 ml-20 mb-20 fixed top-43 bg-red-900"}
+          className={"mt-20 ml-20 mb-20 fixed top-43 bg-green-500 rounded"}
           height={`${canvasY}px`}
           onKeyDown={(e) => changeDirection(e)}
           tabIndex={0}

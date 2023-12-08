@@ -61,7 +61,7 @@ const Forest = (): JSX.Element => {
     return (
       <div
         className={
-          "absolute top-0 m-0 p-5 bg-black w-screen h-screen cursor-default"
+          "absolute top-0 m-0 p-5 bg-red-900 w-screen h-screen cursor-default"
         }
       >
         <div
@@ -104,7 +104,7 @@ const Forest = (): JSX.Element => {
   };
 
   return (
-    <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+    <div className={"absolute top-0 m-0 p-5 bg-red-900 w-screen h-screen"}>
       <div
         className={
           "flex flex-col items-center justify-center text-white text-5xl"
@@ -114,7 +114,7 @@ const Forest = (): JSX.Element => {
           <Image alt={""} className={"h-[515px] w-[515px]"} src={ImageForest} />
           <button
             className={
-              "absolute top-[30px] right-[77px] text-transparent cursor-default w-6 h-12"
+              "absolute top-[30px] right-[77px] text-transparent cursor-default w-6 h-12 bg-transparent"
             }
             onClick={() => setShowForestText(true)}
           />
@@ -133,7 +133,7 @@ const Ocean = (): JSX.Element => {
     return (
       <div
         className={
-          "absolute top-0 m-0 p-5 bg-black w-screen h-screen cursor-default"
+          "absolute top-0 m-0 p-5 bg-red-900 w-screen h-screen cursor-default"
         }
       >
         <div
@@ -172,7 +172,7 @@ const Ocean = (): JSX.Element => {
   };
 
   return (
-    <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+    <div className={"absolute top-0 m-0 p-5 bg-red-900 w-screen h-screen"}>
       <div
         className={
           "flex flex-col items-center justify-center text-white text-5xl"
@@ -182,7 +182,7 @@ const Ocean = (): JSX.Element => {
           <Image alt={""} className={"h-[515px] w-[515px]"} src={ImageOcean} />
           <button
             className={
-              "absolute top-[230px] left-[125px] text-transparent cursor-default"
+              "absolute top-[230px] left-[125px] text-transparent cursor-default bg-transparent"
             }
             onClick={() => setshowOceanText(true)}
           >
@@ -203,7 +203,7 @@ const City = (): JSX.Element => {
     return (
       <div
         className={
-          "absolute top-0 m-0 p-5 bg-black w-screen h-screen cursor-default"
+          "absolute top-0 m-0 p-5 bg-red-900 w-screen h-screen cursor-default"
         }
       >
         <div
@@ -247,7 +247,7 @@ const City = (): JSX.Element => {
   };
 
   return (
-    <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+    <div className={"absolute top-0 m-0 p-5 bg-red-900 w-screen h-screen"}>
       <div
         className={
           "flex flex-col items-center justify-center text-white text-5xl"
@@ -256,7 +256,9 @@ const City = (): JSX.Element => {
         <div className={"object-contain relative"}>
           <Image alt={""} className={"h-[515px] w-[515px]"} src={ImageCity} />
           <button
-            className={"absolute top-[150px] right-0 text-transparent"}
+            className={
+              "absolute top-[150px] right-0 text-transparent bg-transparent"
+            }
             onClick={() => setshowCityText(true)}
           >
             Ko
@@ -309,7 +311,7 @@ const SecondView = (): JSX.Element => {
       </button>
       <button
         className={
-          "shrink px-4xl py-5 outline outline-red-700 font-semibold text-sm bg-transparent rounded-full"
+          "shrink px-4xl py-5 outline outline-black font-semibold text-black text-sm bg-transparent rounded-full"
         }
         onClick={() => {
           router.push("/");

@@ -154,7 +154,9 @@ const Home: React.FC = () => {
           className={"grid h-screen place-items-center text-5xl font-medium"}
         >
           <p>VOUS AVEZ SAUVE LA ZONE !</p>
-          <p className={"text-red-500"}>INDICE : "ARI"</p>
+          <p className={"text-red-500 font-bold p-s bg-white rounded-xl"}>
+            INDICE : "ant"
+          </p>
           <button
             className={
               "bg-blue-500 hover:bg-red-400-700 text-white font-bold py-2 px-4 rounded-full"
@@ -172,7 +174,7 @@ const Home: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className={"score text-4xl"}>Score: {score}</div>
+          <div className={"score text-4xl p-4"}>Score: {score}</div>
           <div className={"items"}>
             {items.map((item, index) => (
               <Item key={index} item={item} onClick={() => setOnClick(index)} />

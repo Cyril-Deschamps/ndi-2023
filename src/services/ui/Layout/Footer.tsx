@@ -55,11 +55,8 @@ const Footer = (): JSX.Element => {
             }
           >
             © {new Date().getFullYear()} {AppConfig.siteName} -{" "}
-            {AppConfig.author}. Chibre.
+            {AppConfig.author}.
           </p>
-          <div className={"md:basis-full justify-center flex  w-full"}>
-            Chibron
-          </div>
 
           <nav
             className={

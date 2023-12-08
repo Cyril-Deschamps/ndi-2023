@@ -103,8 +103,10 @@ const FourthView = (): JSX.Element => {
   return (
     <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
       Les scientifiques ont conçu une mission audacieuse : <br />
-      envoyer Furio dans le passé pour sauver le monde et réveiller la magie de
-      Noël.
+      <strong>
+        envoyer Furio dans le passé pour sauver le monde et réveiller la magie
+        de Noël.
+      </strong>
     </p>
   );
 };
@@ -113,8 +115,11 @@ const FifthView = (): JSX.Element => {
   return (
     <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
       Votre mission, si vous l'acceptez : <br />
-      remodeler le présent en accomplissant des missions aux quatre coins du
-      monde... Bonne chance à vous !
+      <strong>
+        remodeler le présent en accomplissant des missions aux quatre coins du
+        monde...
+      </strong>{" "}
+      Bonne chance à vous !
     </p>
   );
 };
