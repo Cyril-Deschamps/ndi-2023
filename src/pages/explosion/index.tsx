@@ -13,6 +13,7 @@ import toxique from "../../assets/img/tox_4.png";
 import whale from "../../assets/img/wha_8.png";
 import useSound from "use-sound";
 
+// Tableaux d'images pour les ennemis et les alliés
 const Ennemie: StaticImageData[] = [
   cigarette,
   nucleaire,
@@ -22,20 +23,22 @@ const Ennemie: StaticImageData[] = [
 ];
 const Alie: StaticImageData[] = [arbre, earth, manchot, whale];
 
-interface ItemProps {
+// Interface pour définir la structure d'un élément généré
+interface GeneratedItem {
   image: StaticImageData;
-  onClick: () => void;
+  etat: string;
   clicked: boolean;
   position: { top: number; left: number };
 }
 
+// Composant pour afficher un élément généré
 const Item: React.FC<ItemProps> = ({ image, onClick, clicked, position }) => {
-  const [play] = useSound("boom_sound.mp3");
+  const [play] = useSound("explo.mp3");
 
   return (
     <Image
       alt={"Item"}
-      className={`absolute object-fill w-30 h-30`}
+      className={`absolute object-fill w-20 h-20`}
       onClick={() => {
         onClick();
         play();
@@ -49,13 +52,7 @@ const Item: React.FC<ItemProps> = ({ image, onClick, clicked, position }) => {
   );
 };
 
-interface GeneratedItem {
-  image: StaticImageData;
-  etat: string;
-  clicked: boolean;
-  position: { top: number; left: number };
-}
-
+// Fonction pour générer un élément avec une position aléatoire
 const GenerateItem = ({
   Ennemie,
   Alie,
@@ -77,17 +74,21 @@ const GenerateItem = ({
   return { image: sourceArray[rand], etat, clicked: false, position };
 };
 
+// Composant principal de l'application
 const Home: React.FC = () => {
-  const [items, setItems] = useState<GeneratedItem[]>([]);
-  const [score, setScore] = useState<number>(0);
+  const [items, setItems] = useState<GeneratedItem[]>([]); // État pour stocker les éléments générés
+  const [score, setScore] = useState<number>(0); // État pour stocker le score
 
+  // Effet qui se déclenche une seule fois au chargement de la page
   useEffect(() => {
+    // Générer un tableau d'éléments et les stocker dans l'état
     const generatedItems = Array.from({ length: 10 }, () =>
       GenerateItem({ Ennemie, Alie }),
     );
     setItems(generatedItems);
   }, []);
 
+  // Fonction appelée lorsqu'un élément est cliqué
   const setOnClick = (index: number) => {
     setItems((prevItems) => {
       const newItems = [...prevItems];
@@ -96,12 +97,12 @@ const Home: React.FC = () => {
       if (!clickedItem.clicked) {
         // Vérifiez si l'élément n'a pas déjà été cliqué
         if (clickedItem.etat === "Ennemie") {
-          setScore((prevScore) => prevScore + 1);
+          setScore((prevScore) => prevScore + 1); // Augmenter le score si c'est un ennemi
         } else if (clickedItem.etat === "Alie") {
-          setScore((prevScore) => prevScore - 1);
+          setScore((prevScore) => prevScore - 1); // Diminuer le score si c'est un allié
         }
 
-        clickedItem.clicked = true;
+        clickedItem.clicked = true; // Marquer l'élément comme cliqué
 
         // Vérifiez si l'image est "boom" et affichez-la pendant 2 secondes
         if (clickedItem.image === boom) {
@@ -117,6 +118,7 @@ const Home: React.FC = () => {
     });
   };
 
+  // Rendu de l'interface
   return (
     <div>
       <div className={"score"}>Score: {score}</div>
