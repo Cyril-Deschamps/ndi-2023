@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
+
 import boom from "../../assets/img/boom.png";
 import arbre from "../../assets/img/arb_9.png";
 import cigarette from "../../assets/img/cig_1.png";
