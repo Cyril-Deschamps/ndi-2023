@@ -21,64 +21,61 @@ const Ennemie: StaticImageData[] = [
 ];
 const Alie: StaticImageData[] = [arbre, earth, manchot, whale];
 
-function Item({
-  image,
-  onClick,
-  clicked,
-}: {
+interface ItemProps {
   image: StaticImageData;
   onClick: () => void;
   clicked: boolean;
-}) {
-  const [randomPositions] = useState({
-    top: Math.round(75 + Math.random() * (window.innerHeight * 0.6 - 75)),
-    left: Math.round(75 + Math.random() * (window.innerWidth - 75)),
-  });
+  position: { top: number; left: number };
+}
 
+const Item: React.FC<ItemProps> = ({ image, onClick, clicked, position }) => {
   return (
     <Image
       alt={"Item"}
-      className={`absolute object-fill w-30 h-30`}
+      className={"absolute object-fill w-20 h-20"}
       onClick={onClick}
       src={clicked ? boom : image}
       style={{
-        top: randomPositions.top,
-        left: randomPositions.left,
+        top: position.top,
+        left: position.left,
       }}
     />
   );
+};
+
+interface GeneratedItem {
+  image: StaticImageData;
+  etat: string;
+  clicked: boolean;
+  position: { top: number; left: number };
 }
 
-function GenerateItem({
+const GenerateItem = ({
   Ennemie,
   Alie,
 }: {
   Ennemie: StaticImageData[];
   Alie: StaticImageData[];
-}): { image: StaticImageData; etat: string } {
+}): GeneratedItem => {
   const tableauCombine: StaticImageData[] = [...Ennemie, ...Alie];
   const rand = Math.floor(Math.random() * tableauCombine.length);
-
   const etat = rand < Ennemie.length ? "Ennemie" : "Alie";
 
-  return { image: tableauCombine[rand], etat };
-}
+  const position = {
+    top: Math.round(75 + Math.random() * (window.innerHeight * 0.6 - 75)),
+    left: Math.round(75 + Math.random() * (window.innerWidth - 75)),
+  };
+
+  return { image: tableauCombine[rand], etat, clicked: false, position };
+};
 
 const Home: React.FC = () => {
-  const [items, setItems] = useState<
-    { image: StaticImageData; etat: string; clicked: boolean }[]
-  >([]);
+  const [items, setItems] = useState<GeneratedItem[]>([]);
 
   useEffect(() => {
-    const generatedItems: {
-      image: StaticImageData;
-      etat: string;
-      clicked: boolean;
-    }[] = [];
-    for (let i = 0; i < 10; i++) {
-      const { image, etat } = GenerateItem({ Ennemie, Alie });
-      generatedItems.push({ image, etat, clicked: false });
-    }
+    const generatedItems = Array.from({ length: 10 }, () =>
+      GenerateItem({ Ennemie, Alie }),
+    );
     setItems(generatedItems);
   }, []);
 
@@ -98,6 +95,7 @@ const Home: React.FC = () => {
           clicked={item.clicked}
           image={item.image}
           onClick={() => setOnClick(index)}
+          position={item.position}
         />
       ))}
     </div>
