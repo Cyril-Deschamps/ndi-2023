@@ -2,7 +2,6 @@ import questionsData from "./questions.json";
 import popupMessages from "./popupMessage.json";
 import React, { useEffect, useRef, useState } from "react";
 import AppleLogo from "../assets/img/icons/applePixels.png";
-import Monitor from "../assets/img/icons/oldMonitor.png";
 import useInterval from "../services/snake/useInterval";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -10,12 +9,12 @@ import dynamic from "next/dynamic";
 const canvasX = 700;
 const canvasY = 700;
 const initialSnake = [
-  [4, 10],
-  [4, 10],
+  [3, 3],
+  [2, 3],
 ];
-const initialApple = [12, 10];
+const initialApple = [5, 5];
 const scale = 50;
-const timeDelay = 100;
+const timeDelay = 150;
 
 function Snake() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -26,9 +25,7 @@ function Snake() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [isFruitLoaded, setIsFruitLoaded] = useState(false);
-  const [extraSquares, setExtraSquares] = useState<
-    { id: number; text: string; isCorrect: boolean }[]
-  >([]);
+  const [extraSquares, setExtraSquares] = useState< { id: number; text: string; isCorrect: boolean }[]>([]);
   const [isAlreadySquare, setIsAlreadySquare] = useState<boolean>(false);
   const [squareNumber, setSquareNumber] = useState<number>(0);
   const [questionText, setQuestionText] = useState<string | null>(null);
@@ -113,7 +110,7 @@ function Snake() {
       handleSetScore();
       setBoutonVisible(true);
       setExtraSquares([]);
-      setSquareNumber(squareNumber - 3);
+      setSquareNumber(0);
       setQuestionText("");
     }
     if (!appleAte(newSnake)) {
@@ -134,7 +131,7 @@ function Snake() {
     };
   }, []);
 
-  function changeDirection(e: React.KeyboardEvent<HTMLDivElement>) {
+  function changeDirection(e: React.KeyboardEvent<HTMLCanvasElement>) {
     switch (e.key) {
       case "ArrowLeft":
         setDirection([-1, 0]);
@@ -166,16 +163,15 @@ function Snake() {
   };
 
   const handleButtonClick = (isCorrect: boolean): void => {
-    const popupId = isCorrect ? 1 : 2;
+    const popupId = isCorrect ? 1 : 4;
     const popupData = popupMessages.find((popup) => popup.id === popupId);
-
     if (popupData) {
       setShowPopup(true);
       setPopupContent({
         title: popupData.title,
         message: popupData.message,
         isCorrect,
-      });
+      })
     }
   };
 
@@ -196,21 +192,23 @@ function Snake() {
     }
   }, [squareNumber]);
 
-  useEffect(() => {
+  useEffect(() => { 
     const count = score % 3;
-    if (count >= 1 && count < 3) {
+    if (score != 0){
       popCarre();
-    } else if (count === 3) {
-      setPause(true);
+      if (count === 0 && score != 0) {
+        setPause(true);
+      }
+
     }
   }, [score]);
 
-  const popCarre = () => {
+  const popCarre = () => { //Fait apparaitre un carré de question
     if (!isAlreadySquare) {
       setIsAlreadySquare(true);
     }
 
-    if (squareNumber < 3) {
+    if (squareNumber < 3) { 
       setSquareNumber(squareNumber + 1);
       const lastSquare = extraSquares[extraSquares.length - 1]?.id || 0;
       setExtraSquares([
@@ -244,9 +242,7 @@ function Snake() {
         {gameOver && (
           <div
             className={
-              "fixed top-43.2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl"
-            }
-          >
+              "fixed top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl"}>
             Game Over
           </div>
         )}
@@ -260,14 +256,6 @@ function Snake() {
             Play
           </button>
         )}
-        <div
-          className={
-            "float-right m-30 mt-50 shadow-[0px_4px_13px_0px_rgba(48,26,74,0.63)]"
-          }
-        >
-          <h2>Score: {score}</h2>
-          <h2>High Score: {localStorage.getItem("snakeScore")}</h2>
-        </div>
       </div>
 
       <div>
@@ -293,7 +281,7 @@ function Snake() {
             <div className={"popup"}>
               <h2>{popupContent.title}</h2>
               <p>{popupContent.message}</p>
-              <button onClick={handlePopupClose}>OK</button>
+              <button onClick={handlePopupClose}>Retour au menu principal</button>
             </div>
           </div>
         )}
