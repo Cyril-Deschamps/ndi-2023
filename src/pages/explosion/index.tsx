@@ -11,6 +11,7 @@ import manchot from "../../assets/img/man_6.png";
 import petrole from "../../assets/img/pet_5.png";
 import toxique from "../../assets/img/tox_4.png";
 import whale from "../../assets/img/wha_8.png";
+import useSound from "use-sound";
 
 const Ennemie: StaticImageData[] = [
   cigarette,
@@ -29,11 +30,16 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({ image, onClick, clicked, position }) => {
+  const [play] = useSound("boom_sound.mp3");
+
   return (
     <Image
       alt={"Item"}
-      className={"absolute object-fill w-20 h-20"}
-      onClick={onClick}
+      className={`absolute object-fill w-30 h-30`}
+      onClick={() => {
+        onClick();
+        play();
+      }}
       src={clicked ? boom : image}
       style={{
         top: position.top,
