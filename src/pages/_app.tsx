@@ -11,6 +11,7 @@ import "../services/validations/yup-init";
 import "../services/i18n";
 import { ProvideToast } from "../services/toast-notifications";
 import { useRouter } from "next/router";
+
 const varsityTeamFont = localFont({
   src: "../assets/fonts/VarsityTeam.otf",
   variable: "--font-varsity-team",
