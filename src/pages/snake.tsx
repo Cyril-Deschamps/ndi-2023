@@ -5,8 +5,8 @@ import useInterval from "../services/snake/useInterval"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 
-const canvasX = 1000
-const canvasY = 1000
+const canvasX = 800
+const canvasY = 800
 const initialSnake = [ [ 4, 10 ], [ 4, 10 ] ]
 const initialApple = [ 14, 10 ]
 const scale = 50
@@ -115,10 +115,10 @@ function Snake() {
 
 	return (
 		<div onKeyDown={(e) => changeDirection(e)}>
-			<Image id="fruit" src={AppleLogo} alt="fruit" width="30" />
-			<canvas className="w-585 h-440 fixed top-43 left-1/2 transform translate-x-[-50%] translate-y-[-50%]" ref={canvasRef} width={`${canvasX}px`} height={`${canvasY}px`} />
+			<Image id="fruit" className="hidden" src={AppleLogo} alt="fruit" width="30" />  
+			<canvas className="mt-20 ml-20 mb-20 fixed top-43 bg-red-900" ref={canvasRef} width={`${canvasX}px`} height={`${canvasY}px`} />
 			{gameOver && <div className="fixed top-43.2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl">Game Over</div>}
-			<button onClick={play}  className="fixed top-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-purple-800 border-2 border-white p-10 text-sm shadow-md font-bold tracking-wider uppercase font-cursive">
+			<button onClick={play}  className="fixed top-10 left-3/4 text-white bg-purple-800 border-2 border-white p-10 text-sm shadow-md font-bold tracking-wider uppercase font-cursive">
 				Play
 			</button>
 			<div className="float-right m-30 mt-50 shadow-[0px_4px_13px_0px_rgba(48,26,74,0.63)]" >
