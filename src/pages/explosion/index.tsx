@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import arbre from "../../assets/img/arbre.png";
+import Image, { StaticImageData } from "next/image";
+
 import boom from "../../assets/img/boom.png";
 
-function Arbre() {
+import arbre from "../../assets/img/arbre.png";
+import cigarette from "../../assets/img/cig_1.png";
+import nucleaire from "../../assets/img/nuc_2.png";
+import bouteille from "../../assets/img/bot_3.png";
+
+const Alie: StaticImageData[] = [cigarette, nucleaire, bouteille];
+const Ennemie: StaticImageData[] = [arbre];
+
+function Item() {
   const [maxWidth, setMaxWidht] = useState(1000);
   const [maxHeight, setMaxHeight] = useState(600);
   const [clicked, setClicked] = useState(false);
@@ -33,17 +41,19 @@ function Arbre() {
   );
 }
 
+function GenerateItem(Ennemie: StaticImageData[], Alie: StaticImageData) {
+  const [randomImage] = useState(imgs[]);
+  
+  const min = 0;
+  const max = Ennemie.length + Alie.length; 
+  let rand = min + (Math.random() * (max-min));
+  
+}
+
 const Home: React.FC = () => {
   return (
     <div className={"items"}>
-      <Arbre />
-      <Arbre />
-      <Arbre />
-      <Arbre />
-      <Arbre />
-      <Arbre />
-      <Arbre />
-      <Arbre />
+      <GenerateItem />
     </div>
   );
 };
