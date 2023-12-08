@@ -33,7 +33,7 @@ interface GeneratedItem {
 
 // Composant pour afficher un élément généré
 const Item: React.FC<ItemProps> = ({ image, onClick, clicked, position }) => {
-  const [play] = useSound("explo.mp3");
+  const [play] = useSound("explosion.mp3");
 
   return (
     <Image
