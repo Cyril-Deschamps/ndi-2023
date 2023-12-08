@@ -28,6 +28,7 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
+
     <div className={"flex flex-1 justify-center items-center"}>
       {time >= 0 && time < 4 ? <FirstView /> : null}
       {time >= 5 && time < 10 ? <SecondView /> : null}
