@@ -10,8 +10,6 @@ import nextI18NextConfig from "../../next-i18next.config";
 import "../services/validations/yup-init";
 import "../services/i18n";
 import { ProvideToast } from "../services/toast-notifications";
-import Snake from "./snake";
-
 const varsityTeamFont = localFont({
   src: "../assets/fonts/VarsityTeam.otf",
   variable: "--font-varsity-team",
