@@ -111,7 +111,7 @@ const Forest = (): JSX.Element => {
         }
       >
         <div className={"object-contain relative"}>
-          <Image alt={""} className={"h-[600px] w-[600px]"} src={ImageForest} />
+          <Image alt={""} className={"h-[515px] w-[515px]"} src={ImageForest} />
           <button
             className={
               "absolute top-[30px] right-[77px] text-transparent cursor-default w-6 h-12"
@@ -179,7 +179,7 @@ const Ocean = (): JSX.Element => {
         }
       >
         <div className={"object-contain relative"}>
-          <Image alt={""} className={"h-[600px] w-[600px]"} src={ImageOcean} />
+          <Image alt={""} className={"h-[515px] w-[515px]"} src={ImageOcean} />
           <button
             className={
               "absolute top-[230px] left-[125px] text-transparent cursor-default"
@@ -254,7 +254,7 @@ const City = (): JSX.Element => {
         }
       >
         <div className={"object-contain relative"}>
-          <Image alt={""} className={"h-[600px] w-[600px]"} src={ImageCity} />
+          <Image alt={""} className={"h-[515px] w-[515px]"} src={ImageCity} />
           <button
             className={"absolute top-[150px] right-0 text-transparent"}
             onClick={() => setshowCityText(true)}
