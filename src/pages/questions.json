@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "text": "Planter des arbres résout tous les problèmes liés au changement climatique",
+    "isCorrect": false
+  },
+  {
+    "id": 2,
+    "text": "Passer massivement aux énergies renouvelables, telles que le solaire et l'éolien, serait une bonne solution face au changement climatique",
+    "isCorrect": true
+  },
+  {
+    "id": 3,
+    "text": "L'énergie nucléaire est la seule solution viable pour réduire les émissions de carbone.",
+    "isCorrect": false
+  }
+]

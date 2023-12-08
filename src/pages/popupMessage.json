@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "title": "Bravo, vous avez trouvé la bonne réponse !",
+    "message": "En effet, L'une des solutions clés au changement climatique est de passer massivement aux énergies renouvelables, telles que le solaire et l'éolien. Cette transition permet de réduire les émissions de gaz à effet de serre, de diversifier les sources d'énergie et de créer des emplois dans le secteur des énergies propres. Le sduex autres sont des idées reçues. Bien que la reforestation soit une mesure importante pour absorber le dioxyde de carbone de l'atmosphère, elle ne peut pas résoudre à elle seule tous les problèmes liés au changement climatique. Les émissions continues de gaz à effet de serre provenant de sources humaines doivent également être réduites. Bien que l'énergie nucléaire soit une source d'énergie à faibles émissions de carbone, elle présente des défis tels que la gestion des déchets nucléaires, la sécurité et les préoccupations publiques. D'autres solutions, telles que les énergies renouvelables et l'efficacité énergétique, sont également essentielles dans le mix énergétique durable."
+  },
+  { "id": 2, "title": "Dommage...", "message": "il va falloir recommencer" }
+]
