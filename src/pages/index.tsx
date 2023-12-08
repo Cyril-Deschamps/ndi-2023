@@ -14,10 +14,13 @@ const LastView = dynamic(() => import("../services/home/components/LastView"), {
 });
 
 const Home = (): JSX.Element => {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(-1);
 
   // React timer
   useEffect(() => {
+    if (localStorage.getItem("alreadyPlayed") === "true") {
+      setTime(44);
+    }
     const interval = setInterval(() => {
       setTime((time) => time + 1);
     }, 1000);
@@ -26,15 +29,14 @@ const Home = (): JSX.Element => {
 
   return (
     <div className={"flex flex-1 justify-center items-center"}>
-      {time < 4 ? <FirstView /> : null}
+      {time >= 0 && time < 4 ? <FirstView /> : null}
       {time >= 5 && time < 10 ? <SecondView /> : null}
       {time >= 11 && time < 16 ? <SecondImage /> : null}
       {time >= 17 && time < 21 ? <ThirdView /> : null}
       {time >= 22 && time < 27 ? <FourthView /> : null}
       {time >= 28 && time < 31 ? <FirstImage /> : null}
       {time >= 32 && time < 37 ? <FifthView /> : null}
-      {time >= 38 && time < 43 ? <SixthView /> : null}
-      {time >= 44 ? <LastView /> : null}
+      {time >= 37 ? <LastView /> : null}
     </div>
   );
 };
@@ -81,12 +83,7 @@ const ThirdView = (): JSX.Element => {
 
 const FirstImage = (): JSX.Element => {
   return (
-    <Image
-      alt={"Picture of the author"}
-      height={1000}
-      src={furio}
-      width={1000}
-    />
+    <Image alt={"Picture of the author"} height={500} src={furio} width={500} />
   );
 };
 
@@ -117,15 +114,7 @@ const FifthView = (): JSX.Element => {
     <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
       Votre mission, si vous l'acceptez : <br />
       remodeler le présent en accomplissant des missions aux quatre coins du
-      monde...
-    </p>
-  );
-};
-
-const SixthView = (): JSX.Element => {
-  return (
-    <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
-      Bonne chance à vous !
+      monde... Bonne chance à vous !
     </p>
   );
 };
