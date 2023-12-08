@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps } from "next";
 import nextI18NextConfig from "../../next-i18next.config";
@@ -6,6 +6,12 @@ import Image from "next/image";
 import furio from "../assets/img/furio.png";
 import ville1 from "../assets/img/Ville1.png";
 
+import dynamic from "next/dynamic";
+
+const LastView = dynamic(() => import("../services/home/components/LastView"), {
+  ssr: false,
+  loading: () => <div>loading...</div>,
+});
 
 const Home = (): JSX.Element => {
   const [time, setTime] = useState(0);
@@ -20,7 +26,7 @@ const Home = (): JSX.Element => {
 
   return (
     <div className={"flex flex-1 justify-center items-center"}>
-      {time < 4 ? <FirstView/> : null}
+      {time < 4 ? <FirstView /> : null}
       {time >= 5 && time < 10 ? <SecondView /> : null}
       {time >= 11 && time < 16 ? <SecondImage /> : null}
       {time >= 17 && time < 21 ? <ThirdView /> : null}
@@ -28,6 +34,7 @@ const Home = (): JSX.Element => {
       {time >= 28 && time < 31 ? <FirstImage /> : null}
       {time >= 32 && time < 37 ? <FifthView /> : null}
       {time >= 38 && time < 43 ? <SixthView /> : null}
+      {time >= 44 ? <LastView /> : null}
     </div>
   );
 };
@@ -44,8 +51,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 
 export default Home;
 
-
-
 const FirstView = (): JSX.Element => {
   return (
     <div>
@@ -59,7 +64,7 @@ const FirstView = (): JSX.Element => {
 
 const SecondView = (): JSX.Element => {
   return (
-    <p className={'text-white text-5xl fadeOut 5s ease-in-out text-center'}>
+    <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
       Le réchauffement climatique a englouti la planète, privant Noël de sa
       neige tant aimée.
     </p>
@@ -75,45 +80,47 @@ const ThirdView = (): JSX.Element => {
 };
 
 const FirstImage = (): JSX.Element => {
-    return (
-      <Image 
+  return (
+    <Image
       alt={"Picture of the author"}
       height={1000}
       src={furio}
-      width={1000}/>
-    );
-  };
+      width={1000}
+    />
+  );
+};
 
-  const SecondImage = (): JSX.Element => {
-    return (
-      <Image
-        alt={"Picture of the author"}
-        height={700}
-        src={ville1}
-        style={{ borderRadius: '32px' }} // Adjust the pixel value based on your preference
-        width={700}
-      />
-    );
-  };
-
+const SecondImage = (): JSX.Element => {
+  return (
+    <Image
+      alt={"Picture of the author"}
+      height={700}
+      src={ville1}
+      style={{ borderRadius: "32px" }} // Adjust the pixel value based on your preference
+      width={700}
+    />
+  );
+};
 
 const FourthView = (): JSX.Element => {
   return (
     <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
       Les scientifiques ont conçu une mission audacieuse : <br />
-      envoyer Furio dans le passé pour sauver le monde et réveiller la magie de Noël.
+      envoyer Furio dans le passé pour sauver le monde et réveiller la magie de
+      Noël.
     </p>
   );
-}
+};
 
 const FifthView = (): JSX.Element => {
   return (
     <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
-      Votre mission, si vous l'acceptez : < br />
-      remodeler le présent en accomplissant des missions aux quatre coins du monde...
+      Votre mission, si vous l'acceptez : <br />
+      remodeler le présent en accomplissant des missions aux quatre coins du
+      monde...
     </p>
   );
-}
+};
 
 const SixthView = (): JSX.Element => {
   return (
@@ -121,4 +128,4 @@ const SixthView = (): JSX.Element => {
       Bonne chance à vous !
     </p>
   );
-}
+};
