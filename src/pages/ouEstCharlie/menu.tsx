@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps } from "next";
 import nextI18NextConfig from "../../../next-i18next.config";
+
 import Image from "next/image";
+
 import ImageFurio from "../../assets/img/furio.png";
+import ImageForest from "../../assets/img/oecForet.png";
+import ImageOcean from "../../assets/img/oecOcean.png";
+import ImageCity from "../../assets/img/oecVille.png";
 
 const Menu = (): JSX.Element => {
   const [time, setTime] = useState(0);
@@ -24,14 +29,14 @@ const Menu = (): JSX.Element => {
         }
       >
         <p>Trouvez Furio</p>
-        <Image alt={""} className={"shrink"} src={ImageFurio} />
+        <Image alt={""} src={ImageFurio} />
       </div>
     );
   };
 
   return (
     <div className={"flex flex-1 justify-center items-center bg-green"}>
-      {time < 3 ? <FirstView /> : <SecondView />}
+      {time < 1 ? <FirstView /> : <SecondView />}
     </div>
   );
 };
@@ -49,31 +54,107 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 export default Menu;
 
 const Forest = (): JSX.Element => {
-  return (
-    <div className={"absolute bg-green w-screen h-screen p-4xl"}>
-      <div className={"text-white text-5xl"}>
-        <img src={""} />
+  const [showForestText, setShowForestText] = useState(false);
+
+  const ForestText = (): JSX.Element => {
+    return (
+      <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+        Hello
       </div>
+    );
+  };
+
+  return (
+    <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+      <div
+        className={
+          "flex flex-col items-center justify-center text-white text-5xl"
+        }
+      >
+        <div className={"object-contain"}>
+          <Image
+            alt={""}
+            className={"max-h-[800px] w-auto"}
+            src={ImageForest}
+          />
+          <button
+            className={"absolute top-[54px] right-[620px] text-transparent"}
+            onClick={() => setShowForestText(true)}
+          >
+            Ko
+          </button>
+          <p>Trouvez et cliquez sur Furio</p>
+        </div>
+      </div>
+      {showForestText ? <ForestText /> : null}
     </div>
   );
 };
 
 const Ocean = (): JSX.Element => {
-  return (
-    <div className={"absolute bg-green w-screen h-screen p-4xl"}>
-      <div className={"text-white text-5xl"}>
-        <img src={""} />
+  const [showOceanText, setshowOceanText] = useState(false);
+
+  const OceanText = (): JSX.Element => {
+    return (
+      <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+        Hello
       </div>
+    );
+  };
+
+  return (
+    <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+      <div
+        className={
+          "flex flex-col items-center justify-center text-white text-5xl"
+        }
+      >
+        <div className={"object-contain"}>
+          <Image alt={""} className={"max-h-[800px] w-auto"} src={ImageOcean} />
+          <button
+            className={"absolute top-[400px] left-[720px] text-transparent"}
+            onClick={() => setshowOceanText(true)}
+          >
+            Ko
+          </button>
+          <p>Trouvez et cliquez sur Furio</p>
+        </div>
+      </div>
+      {showOceanText ? <OceanText /> : null}
     </div>
   );
 };
 
 const City = (): JSX.Element => {
-  return (
-    <div className={"absolute bg-green w-screen h-screen p-4xl"}>
-      <div className={"text-white text-5xl"}>
-        <img src={""} />
+  const [showCityText, setshowCityText] = useState(false);
+
+  const CityText = (): JSX.Element => {
+    return (
+      <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+        Hello
       </div>
+    );
+  };
+
+  return (
+    <div className={"absolute top-0 m-0 p-5 bg-black w-screen h-screen"}>
+      <div
+        className={
+          "flex flex-col items-center justify-center text-white text-5xl"
+        }
+      >
+        <div className={"object-contain"}>
+          <Image alt={""} className={"max-h-[800px] w-auto"} src={ImageCity} />
+          <button
+            className={"absolute top-[260px] right-[500px] text-transparent"}
+            onClick={() => setshowCityText(true)}
+          >
+            Ko
+          </button>
+          <p>Trouvez et cliquez sur Furio</p>
+        </div>
+      </div>
+      {showCityText ? <CityText /> : null}
     </div>
   );
 };
