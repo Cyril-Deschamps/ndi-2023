@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
-import boom from "../../assets/img/boom.png";
+import boomImage from "../../assets/img/boom.png";
 import arbre from "../../assets/img/arb_9.png";
 import cigarette from "../../assets/img/cig_1.png";
 import nucleaire from "../../assets/img/nuc_2.png";
@@ -13,7 +13,6 @@ import toxique from "../../assets/img/tox_4.png";
 import whale from "../../assets/img/wha_8.png";
 import useSound from "use-sound";
 
-// Tableaux d'images pour les ennemis et les alliés
 const Ennemie: StaticImageData[] = [
   cigarette,
   nucleaire,
@@ -23,7 +22,6 @@ const Ennemie: StaticImageData[] = [
 ];
 const Alie: StaticImageData[] = [arbre, earth, manchot, whale];
 
-// Interface pour définir la structure d'un élément généré
 interface GeneratedItem {
   image: StaticImageData;
   etat: string;
@@ -31,108 +29,153 @@ interface GeneratedItem {
   position: { top: number; left: number };
 }
 
-// Composant pour afficher un élément généré
-const Item: React.FC<ItemProps> = ({ image, onClick, clicked, position }) => {
+const Item: React.FC<{ item: GeneratedItem; onClick: () => void }> = ({
+  item,
+  onClick,
+}) => {
   const [play] = useSound("explo.mp3");
+
+  useEffect(() => {
+    if (item.clicked && item.image === boomImage) {
+      play();
+    }
+  }, [item.clicked, item.image, play]);
 
   return (
     <Image
       alt={"Item"}
-      className={`absolute object-fill w-20 h-20`}
+      className={`absolute object-fill w-20 h-20 ${
+        item.clicked && item.image === boomImage ? "hidden" : ""
+      }`}
       onClick={() => {
-        onClick();
-        play();
+        onClick(), play();
       }}
-      src={clicked ? boom : image}
-      style={{
-        top: position.top,
-        left: position.left,
-      }}
+      src={item.clicked ? boomImage : item.image}
+      style={{ top: item.position.top, left: item.position.left }}
     />
   );
 };
 
-// Fonction pour générer un élément avec une position aléatoire
-const GenerateItem = ({
-  Ennemie,
-  Alie,
-}: {
-  Ennemie: StaticImageData[];
-  Alie: StaticImageData[];
-}): GeneratedItem => {
+const generateItem = (
+  Ennemie: StaticImageData[],
+  Alie: StaticImageData[],
+): GeneratedItem => {
   const ennemieOrAlie = Math.random() < 0.5 ? "Ennemie" : "Alie";
   const sourceArray = ennemieOrAlie === "Ennemie" ? Ennemie : Alie;
-
   const rand = Math.floor(Math.random() * sourceArray.length);
-  const etat = ennemieOrAlie;
 
-  const position = {
-    top: Math.round(75 + Math.random() * (window.innerHeight * 0.6 - 75)),
-    left: Math.round(75 + Math.random() * (window.innerWidth - 175)),
+  return {
+    image: sourceArray[rand],
+    etat: ennemieOrAlie,
+    clicked: false,
+    position: {
+      top: Math.round(75 + Math.random() * (500 - 75)),
+      left: Math.round(75 + Math.random() * (800 - 75)),
+    },
   };
-
-  return { image: sourceArray[rand], etat, clicked: false, position };
 };
 
-// Composant principal de l'application
 const Home: React.FC = () => {
-  const [items, setItems] = useState<GeneratedItem[]>([]); // État pour stocker les éléments générés
-  const [score, setScore] = useState<number>(0); // État pour stocker le score
+  const [items, setItems] = useState<GeneratedItem[]>([]);
+  const [score, setScore] = useState<number>(0);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
 
-  // Effet qui se déclenche une seule fois au chargement de la page
   useEffect(() => {
-    // Générer un tableau d'éléments et les stocker dans l'état
     const generatedItems = Array.from({ length: 10 }, () =>
-      GenerateItem({ Ennemie, Alie }),
+      generateItem(Ennemie, Alie),
     );
     setItems(generatedItems);
   }, []);
 
-  // Fonction appelée lorsqu'un élément est cliqué
   const setOnClick = (index: number) => {
+    setClickedIndex(index);
+
     setItems((prevItems) => {
       const newItems = [...prevItems];
       const clickedItem = newItems[index];
 
       if (!clickedItem.clicked) {
-        // Vérifiez si l'élément n'a pas déjà été cliqué
         if (clickedItem.etat === "Ennemie") {
-          setScore((prevScore) => prevScore + 1); // Augmenter le score si c'est un ennemi
+          setScore((prevScore) => prevScore + 1);
         } else if (clickedItem.etat === "Alie") {
-          setScore((prevScore) => prevScore - 1); // Diminuer le score si c'est un allié
+          setScore((prevScore) => prevScore - 1);
         }
 
-        clickedItem.clicked = true; // Marquer l'élément comme cliqué
+        clickedItem.clicked = true;
 
-        // Vérifiez si l'image est "boom" et affichez-la pendant 2 secondes
-        if (clickedItem.image === boom) {
-          setTimeout(() => {
-            // Générer une nouvelle image après 2 secondes
-            newItems[index] = GenerateItem({ Ennemie, Alie });
-            setItems(newItems);
-          }, 2000);
-        }
+        // Régénérer seulement l'élément cliqué après 2 secondes
+        setTimeout(() => {
+          setItems((prevItems) => {
+            return prevItems.map((item, i) => {
+              if (i === index) {
+                const newPosition = {
+                  top: Math.round(75 + Math.random() * (500 - 75)),
+                  left: Math.round(75 + Math.random() * (800 - 75)),
+                };
+
+                const ennemieOrAlie = Math.random() < 0.5 ? "Ennemie" : "Alie";
+                const sourceArray =
+                  ennemieOrAlie === "Ennemie" ? Ennemie : Alie;
+                const rand = Math.floor(Math.random() * sourceArray.length);
+
+                return {
+                  ...item,
+                  clicked: false,
+                  position: newPosition,
+                  image: sourceArray[rand],
+                  etat: ennemieOrAlie,
+                };
+              }
+
+              return item;
+            });
+          });
+        }, 500);
       }
 
       return newItems;
     });
   };
 
-  // Rendu de l'interface
+  const isVictory = score === 10 || items.every((item) => item.etat === "Alie");
+
+  const defeat = score < 0;
+
   return (
-    <div>
-      <div className={"score"}>Score: {score}</div>
-      <div className={"items"}>
-        {items.map((item, index) => (
-          <Item
-            key={index}
-            clicked={item.clicked}
-            image={item.image}
-            onClick={() => setOnClick(index)}
-            position={item.position}
-          />
-        ))}
-      </div>
+    <div
+      className={
+        "bg-[url('https://media.moddb.com/images/games/1/16/15935/screenshot_20229089.jpg')] w-screen h-screen bg-cover"
+      }
+    >
+      {isVictory ? (
+        <div
+          className={"grid h-screen place-items-center text-5xl font-medium"}
+        >
+          <p>VOUS AVEZ SAUVE LA ZONE !</p>
+          <p className={"text-red-500"}>INDICE : "ARI"</p>
+          <button
+            className={
+              "bg-blue-500 hover:bg-red-400-700 text-white font-bold py-2 px-4 rounded-full"
+            }
+          >
+            <a href={""}>PROCHAINE DESTINATION</a>
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className={"score text-4xl"}>Score: {score}</div>
+          <div className={"items"}>
+            {items.map((item, index) => (
+              <Item key={index} item={item} onClick={() => setOnClick(index)} />
+            ))}
+          </div>
+        </>
+      )}
+      {defeat && (
+        <p className={"grid h-screen place-items-center text-5xl font-medium"}>
+          Vous avez perdu !<a href={""}>REESSAYER</a>
+        </p>
+      )}
     </div>
   );
 };
