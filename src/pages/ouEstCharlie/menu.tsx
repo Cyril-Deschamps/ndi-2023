@@ -37,7 +37,7 @@ const Menu = (): JSX.Element => {
 
   return (
     <div className={"flex flex-1 justify-center items-center bg-green"}>
-      {time < 1 ? <FirstView /> : <SecondView />}
+      {time < 3 ? <FirstView /> : <SecondView />}
     </div>
   );
 };
@@ -282,7 +282,7 @@ const SecondView = (): JSX.Element => {
         "flex flex-col items-center gap-xl text-white text-5xl text-center"
       }
     >
-      <p>Empêche-le de mal agir</p>
+      <p>Trouver les dans ses trois biomes</p>
       <button
         className={
           "shrink px-4xl py-5 outline font-semibold text-sm bg-transparent rounded-full"
