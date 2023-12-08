@@ -3,8 +3,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps } from "next";
 import nextI18NextConfig from "../../next-i18next.config";
 import Image from "next/image";
-import win1 from "../assets/img/win1.png";
+import loose1 from "../assets/img/loose1.png";
 
+import { useRouter } from "next/router";
+import { set } from "date-fns";
 
 const Home = (): JSX.Element => {
   const [time, setTime] = useState(0);
@@ -19,10 +21,11 @@ const Home = (): JSX.Element => {
 
   return (
     <div className={"flex flex-1 justify-center items-center"}>
-      {time < 4 ? <FirstView/> : null}
+      {time < 4 ? <FirstView /> : null}
       {time >= 5 && time < 10 ? <SecondView /> : null}
       {time >= 11 && time < 16 ? <FirstImage /> : null}
-      {time >= 17 ? <ThirdView /> : null}
+      {time >= 17 && time < 21 ? <ThirdView /> : null}
+      {time >= 22 && time < 27 ? <RestartGamePrompt /> : null}
     </div>
   );
 };
@@ -39,13 +42,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 
 export default Home;
 
-
-
 const FirstView = (): JSX.Element => {
   return (
     <div>
       <p className={`text-white text-5xl text-center`}>
-        Votre mission est un succès
+        Votre mission a échoué...
       </p>
     </div>
   );
@@ -53,8 +54,8 @@ const FirstView = (): JSX.Element => {
 
 const SecondView = (): JSX.Element => {
   return (
-    <p className={'text-white text-5xl fadeOut 5s ease-in-out text-center'}>
-      La Terre est sauvée, la magie de Noël est de retour...
+    <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
+      La Terre est condamnée, la magie de Noël a disparu...
     </p>
   );
 };
@@ -62,17 +63,37 @@ const SecondView = (): JSX.Element => {
 const ThirdView = (): JSX.Element => {
   return (
     <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
-      Félicitations, vous avez sauvé Noël !
+      Tout espoir est perdu...
     </p>
   );
 };
 
 const FirstImage = (): JSX.Element => {
-    return (
-      <Image 
+  return (
+    <Image
       alt={"Picture of the author"}
       height={1000}
-      src={win1}
-      width={1000}/>
-    );
-  };
+      src={loose1}
+      width={1000}
+    />
+  );
+};
+
+const RestartGamePrompt = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const shouldRestart = window.confirm("Voulez-vous recommencer la partie?");
+
+    if (shouldRestart) {
+      router.push("/");
+    }
+
+    // Cleanup function to ensure the effect runs only once
+    return () => {
+      // Do nothing in the cleanup function
+    };
+  }, [router]);
+
+  return null; // This component renders nothing
+};
