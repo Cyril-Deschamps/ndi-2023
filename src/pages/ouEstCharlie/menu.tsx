@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import type { GetStaticProps } from "next";
 import nextI18NextConfig from "../../../next-i18next.config";
+import Image from "next/image";
+import ImageFurio from "../../assets/img/furio.png";
 
 const Menu = (): JSX.Element => {
   const [time, setTime] = useState(0);
@@ -15,7 +17,16 @@ const Menu = (): JSX.Element => {
   }, []);
 
   const FirstView = (): JSX.Element => {
-    return <p className={"text-white text-5xl"}>Trouve Charlie</p>;
+    return (
+      <div
+        className={
+          "flex flex-col items-center gap-xl text-white text-5xl text-center"
+        }
+      >
+        <p>Trouvez Furio</p>
+        <Image alt={""} className={"shrink"} src={ImageFurio} />
+      </div>
+    );
   };
 
   return (
