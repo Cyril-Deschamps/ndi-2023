@@ -2,37 +2,45 @@ import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
 import boom from "../../assets/img/boom.png";
-
-import arbre from "../../assets/img/arbre.png";
+import arbre from "../../assets/img/arb_9.png";
 import cigarette from "../../assets/img/cig_1.png";
 import nucleaire from "../../assets/img/nuc_2.png";
 import bouteille from "../../assets/img/bot_3.png";
+import earth from "../../assets/img/ear_7.png";
+import manchot from "../../assets/img/man_6.png";
+import petrole from "../../assets/img/pet_5.png";
+import toxique from "../../assets/img/tox_4.png";
+import whale from "../../assets/img/wha_8.png";
 
-const Alie: StaticImageData[] = [cigarette, nucleaire, bouteille];
-const Ennemie: StaticImageData[] = [arbre];
+const Ennemie: StaticImageData[] = [
+  cigarette,
+  nucleaire,
+  bouteille,
+  toxique,
+  petrole,
+];
+const Alie: StaticImageData[] = [arbre, earth, manchot, whale];
 
-function Item() {
-  const [maxWidth, setMaxWidht] = useState(1000);
-  const [maxHeight, setMaxHeight] = useState(600);
-  const [clicked, setClicked] = useState(false);
+function Item({
+  image,
+  onClick,
+  clicked,
+}: {
+  image: StaticImageData;
+  onClick: () => void;
+  clicked: boolean;
+}) {
   const [randomPositions] = useState({
-    top: Math.round(75 + Math.random() * (maxHeight - 75)),
-    left: Math.round(75 + Math.random() * (maxWidth - 75)),
+    top: Math.round(75 + Math.random() * (window.innerHeight * 0.6 - 75)),
+    left: Math.round(75 + Math.random() * (window.innerWidth - 75)),
   });
-
-  useEffect(() => {
-    if (window !== undefined) {
-      setMaxWidht(window.innerWidth - 75);
-      setMaxHeight(window.innerHeight * 0.6);
-    }
-  }, []);
 
   return (
     <Image
-      alt={"Arbre"}
-      className={`absolute object-fill w-20 h-20`}
-      onClick={() => setClicked(true)}
-      src={clicked ? boom : arbre}
+      alt={"Item"}
+      className={`absolute object-fill w-30 h-30`}
+      onClick={onClick}
+      src={clicked ? boom : image}
       style={{
         top: randomPositions.top,
         left: randomPositions.left,
@@ -41,19 +49,57 @@ function Item() {
   );
 }
 
-function GenerateItem(Ennemie: StaticImageData[], Alie: StaticImageData) {
-  const [randomImage] = useState(imgs[]);
-  
-  const min = 0;
-  const max = Ennemie.length + Alie.length; 
-  let rand = min + (Math.random() * (max-min));
-  
+function GenerateItem({
+  Ennemie,
+  Alie,
+}: {
+  Ennemie: StaticImageData[];
+  Alie: StaticImageData[];
+}): { image: StaticImageData; etat: string } {
+  const tableauCombine: StaticImageData[] = [...Ennemie, ...Alie];
+  const rand = Math.floor(Math.random() * tableauCombine.length);
+
+  const etat = rand < Ennemie.length ? "Ennemie" : "Alie";
+
+  return { image: tableauCombine[rand], etat };
 }
 
 const Home: React.FC = () => {
+  const [items, setItems] = useState<
+    { image: StaticImageData; etat: string; clicked: boolean }[]
+  >([]);
+
+  useEffect(() => {
+    const generatedItems: {
+      image: StaticImageData;
+      etat: string;
+      clicked: boolean;
+    }[] = [];
+    for (let i = 0; i < 10; i++) {
+      const { image, etat } = GenerateItem({ Ennemie, Alie });
+      generatedItems.push({ image, etat, clicked: false });
+    }
+    setItems(generatedItems);
+  }, []);
+
+  const setOnClick = (index: number) => {
+    setItems((prevItems) => {
+      const newItems = [...prevItems];
+      newItems[index].clicked = true;
+      return newItems;
+    });
+  };
+
   return (
     <div className={"items"}>
-      <GenerateItem />
+      {items.map((item, index) => (
+        <Item
+          key={index}
+          clicked={item.clicked}
+          image={item.image}
+          onClick={() => setOnClick(index)}
+        />
+      ))}
     </div>
   );
 };
