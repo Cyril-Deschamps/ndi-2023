@@ -10,7 +10,7 @@ import nextI18NextConfig from "../../next-i18next.config";
 import "../services/validations/yup-init";
 import "../services/i18n";
 import { ProvideToast } from "../services/toast-notifications";
-
+import { useRouter } from "next/router";
 const varsityTeamFont = localFont({
   src: "../assets/fonts/VarsityTeam.otf",
   variable: "--font-varsity-team",
@@ -22,6 +22,7 @@ const robotoFont = Roboto({
 });
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
   return (
     <React.StrictMode>
       <Head>
@@ -34,11 +35,26 @@ const App = ({ Component, pageProps }: AppProps) => {
         className={classNames(
           varsityTeamFont.variable,
           robotoFont.className,
-          "flex flex-col w-full min-h-screen p-0 m-0 bg-appBgColor font-Roboto",
+          "flex flex-col w-full min-h-screen p-0 m-0 bg-black font-Roboto",
         )}
       >
         <ProvideToast>
-          <Component {...pageProps} />
+          <Component className={"z-10"} {...pageProps} />
+          <button
+            className={
+              "z-[100000] text-xs absolute bottom-3 right-3 bg-red-900 border hover:bg-blue-700 text-green-700 font-bold py-1 px-2 rounded"
+            }
+            onClick={() => {
+              localStorage.clear();
+              if (router.pathname !== "/") {
+                router.push("/");
+              } else {
+                router.reload();
+              }
+            }}
+          >
+            <p>Reset game</p>
+          </button>
         </ProvideToast>
       </div>
     </React.StrictMode>

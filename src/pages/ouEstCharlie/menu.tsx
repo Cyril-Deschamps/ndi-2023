@@ -95,7 +95,9 @@ const Forest = (): JSX.Element => {
           >
             Menu
           </button>
-          <p className={"text-center"}>Lettre numéros 1 : I</p>
+          <p className={"text-center text-green-700"}>
+            <strong>Lettre numéro 1 :</strong> "i"
+          </p>
         </div>
       </div>
     );
@@ -108,21 +110,15 @@ const Forest = (): JSX.Element => {
           "flex flex-col items-center justify-center text-white text-5xl"
         }
       >
-        <div className={"object-contain"}>
-          <Image
-            alt={""}
-            className={"max-h-[800px] w-auto"}
-            src={ImageForest}
-          />
+        <div className={"object-contain relative"}>
+          <Image alt={""} className={"h-[600px] w-[600px]"} src={ImageForest} />
           <button
             className={
-              "absolute top-[54px] right-[620px] text-transparent cursor-default"
+              "absolute top-[30px] right-[77px] text-transparent cursor-default w-6 h-12"
             }
             onClick={() => setShowForestText(true)}
-          >
-            Ko
-          </button>
-          <p>Trouvez et cliquez sur Furio</p>
+          />
+          <p className={"text-3xl py-xl"}>Trouvez et cliquez sur Furio</p>
         </div>
       </div>
       {showForestText ? <ForestText /> : null}
@@ -167,7 +163,9 @@ const Ocean = (): JSX.Element => {
           >
             Menu
           </button>
-          <p className={"text-center"}>Lettre numéros 2 : N</p>
+          <p className={"text-center text-green-700"}>
+            <strong>Lettre numéro 2 :</strong> "n"
+          </p>
         </div>
       </div>
     );
@@ -180,17 +178,17 @@ const Ocean = (): JSX.Element => {
           "flex flex-col items-center justify-center text-white text-5xl"
         }
       >
-        <div className={"object-contain"}>
-          <Image alt={""} className={"max-h-[800px] w-auto"} src={ImageOcean} />
+        <div className={"object-contain relative"}>
+          <Image alt={""} className={"h-[600px] w-[600px]"} src={ImageOcean} />
           <button
             className={
-              "absolute top-[400px] left-[720px] text-transparent cursor-default"
+              "absolute top-[230px] left-[125px] text-transparent cursor-default"
             }
             onClick={() => setshowOceanText(true)}
           >
             Ko
           </button>
-          <p>Trouvez et cliquez sur Furio</p>
+          <p className={"text-3xl py-xl"}>Trouvez et cliquez sur Furio</p>
         </div>
       </div>
       {showOceanText ? <OceanText /> : null}
@@ -240,7 +238,9 @@ const City = (): JSX.Element => {
           >
             Menu
           </button>
-          <p className={"text-center"}>Lettre numéros 3 : V</p>
+          <p className={"text-center text-green-700"}>
+            <strong>Lettre numéro 3 :</strong> "v"
+          </p>
         </div>
       </div>
     );
@@ -253,15 +253,15 @@ const City = (): JSX.Element => {
           "flex flex-col items-center justify-center text-white text-5xl"
         }
       >
-        <div className={"object-contain"}>
-          <Image alt={""} className={"max-h-[800px] w-auto"} src={ImageCity} />
+        <div className={"object-contain relative"}>
+          <Image alt={""} className={"h-[600px] w-[600px]"} src={ImageCity} />
           <button
-            className={"absolute top-[260px] right-[500px] text-transparent"}
+            className={"absolute top-[150px] right-0 text-transparent"}
             onClick={() => setshowCityText(true)}
           >
             Ko
           </button>
-          <p>Trouvez et cliquez sur Furio</p>
+          <p className={"text-3xl py-xl"}>Trouvez et cliquez sur Furio</p>
         </div>
       </div>
       {showCityText ? <CityText /> : null}
@@ -309,9 +309,12 @@ const SecondView = (): JSX.Element => {
       </button>
       <button
         className={
-          "shrink px-4xl py-5 outline font-semibold text-sm bg-transparent rounded-full"
+          "shrink px-4xl py-5 outline outline-red-700 font-semibold text-sm bg-transparent rounded-full"
         }
-        onClick={() => router.push("/")}
+        onClick={() => {
+          router.push("/");
+          localStorage.setItem("step", "1");
+        }}
       >
         Menu principal
       </button>
