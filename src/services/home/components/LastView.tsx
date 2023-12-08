@@ -5,6 +5,7 @@ import { Icon } from "leaflet";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import UpdateMapPosition from "./UpdateMapPosition";
+import { el } from "date-fns/locale";
 
 const amazonieCoords = {
   lat: -3.465305,
@@ -153,17 +154,17 @@ const LastView = (): JSX.Element => {
       <Marker
         eventHandlers={{
           click: () => {
-            let errorMessage = false;
             let value = "";
-            while (value !== "invariant") {
               value =
                 prompt(
-                  (errorMessage ? "Faux ! " : "") +
                     "Rentrer le code pour sauver le monde !",
                 ) ?? "";
-              errorMessage = true;
+            if (value === "invariant"){
+              router.push("/the-end");
             }
-            router.push("/the-end");
+            else {
+              router.push("/LOOSER ");
+            }
           },
         }}
         icon={whereIsCharlieIcon}
