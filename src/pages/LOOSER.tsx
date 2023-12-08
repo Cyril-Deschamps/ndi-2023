@@ -5,9 +5,6 @@ import nextI18NextConfig from "../../next-i18next.config";
 import Image from "next/image";
 import loose1 from "../assets/img/loose1.png";
 
-import { useRouter } from "next/router";
-import { set } from "date-fns";
-
 const Home = (): JSX.Element => {
   const [time, setTime] = useState(0);
 
@@ -24,8 +21,7 @@ const Home = (): JSX.Element => {
       {time < 4 ? <FirstView /> : null}
       {time >= 5 && time < 10 ? <SecondView /> : null}
       {time >= 11 && time < 16 ? <FirstImage /> : null}
-      {time >= 17 && time < 21 ? <ThirdView /> : null}
-      {time >= 22 && time < 27 ? <RestartGamePrompt /> : null}
+      {time >= 17 ? <ThirdView /> : null}
     </div>
   );
 };
@@ -77,23 +73,4 @@ const FirstImage = (): JSX.Element => {
       width={1000}
     />
   );
-};
-
-const RestartGamePrompt = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const shouldRestart = window.confirm("Voulez-vous recommencer la partie?");
-
-    if (shouldRestart) {
-      router.push("/");
-    }
-
-    // Cleanup function to ensure the effect runs only once
-    return () => {
-      // Do nothing in the cleanup function
-    };
-  }, [router]);
-
-  return null; // This component renders nothing
 };

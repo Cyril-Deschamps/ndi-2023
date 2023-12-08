@@ -5,7 +5,6 @@ import nextI18NextConfig from "../../next-i18next.config";
 import Image from "next/image";
 import win1 from "../assets/img/win1.png";
 
-
 const Home = (): JSX.Element => {
   const [time, setTime] = useState(0);
 
@@ -19,7 +18,7 @@ const Home = (): JSX.Element => {
 
   return (
     <div className={"flex flex-1 justify-center items-center"}>
-      {time < 4 ? <FirstView/> : null}
+      {time < 4 ? <FirstView /> : null}
       {time >= 5 && time < 10 ? <SecondView /> : null}
       {time >= 11 && time < 16 ? <FirstImage /> : null}
       {time >= 17 ? <ThirdView /> : null}
@@ -39,8 +38,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 
 export default Home;
 
-
-
 const FirstView = (): JSX.Element => {
   return (
     <div>
@@ -53,7 +50,7 @@ const FirstView = (): JSX.Element => {
 
 const SecondView = (): JSX.Element => {
   return (
-    <p className={'text-white text-5xl fadeOut 5s ease-in-out text-center'}>
+    <p className={"text-white text-5xl fadeOut 5s ease-in-out text-center"}>
       La Terre est sauvée, la magie de Noël est de retour...
     </p>
   );
@@ -68,11 +65,12 @@ const ThirdView = (): JSX.Element => {
 };
 
 const FirstImage = (): JSX.Element => {
-    return (
-      <Image 
+  return (
+    <Image
       alt={"Picture of the author"}
       height={1000}
       src={win1}
-      width={1000}/>
-    );
-  };
+      width={1000}
+    />
+  );
+};

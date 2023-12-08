@@ -5,7 +5,6 @@ import { Icon } from "leaflet";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import UpdateMapPosition from "./UpdateMapPosition";
-import { el } from "date-fns/locale";
 
 const amazonieCoords = {
   lat: -3.465305,
@@ -51,8 +50,10 @@ const LastView = (): JSX.Element => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
+    localStorage.setItem("alreadyPlayed", "true");
+
     if (typeof localStorage !== "undefined") {
-      const step = JSON.parse(localStorage.getItem("step") ?? "3");
+      const step = JSON.parse(localStorage.getItem("step") ?? "0");
       if (step) {
         setStep(step);
       }
@@ -120,7 +121,13 @@ const LastView = (): JSX.Element => {
         </Tooltip>
       </Marker>
       <Marker
-        eventHandlers={{ click: () => router.push("/snake") }}
+        eventHandlers={{
+          click: () => {
+            localStorage.setItem("step", "2");
+            setStep(2);
+            /* router.push("/snake") */
+          },
+        }}
         icon={whereIsCharlieIcon}
         position={chinaCoords}
       >
@@ -135,7 +142,13 @@ const LastView = (): JSX.Element => {
         </Tooltip>
       </Marker>
       <Marker
-        eventHandlers={{ click: () => router.push("/explosion") }}
+        eventHandlers={{
+          click: () => {
+            localStorage.setItem("step", "3");
+            setStep(3);
+            /*  router.push("/explosion") */
+          },
+        }}
         icon={arabIcon}
         position={middleEastCoords}
       >
@@ -155,14 +168,13 @@ const LastView = (): JSX.Element => {
         eventHandlers={{
           click: () => {
             let value = "";
-              value =
-                prompt(
-                    "Rentrer le code pour sauver le monde !",
-                ) ?? "";
-            if (value === "invariant"){
+            value =
+              prompt(
+                "Rentrer le code pour sauver le monde ! (e sah c'est invariant)",
+              ) ?? "";
+            if (value.toLowerCase() === "invariant") {
               router.push("/the-end");
-            }
-            else {
+            } else {
               router.push("/LOOSER ");
             }
           },
